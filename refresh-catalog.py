@@ -25,8 +25,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     while True:
-        with open(args.catalog_file, 'w') as outfile:
-            json.dump(get_current_repositories(), outfile)
-            print('Catalog file {} written!'.format(args.catalog_file))
-        time.sleep(1800)
-
+        try:
+            with open(args.catalog_file, 'w') as outfile:
+                json.dump(get_current_repositories(), outfile)
+                print('Catalog file {} written!'.format(args.catalog_file))
+            time.sleep(1800)
+        except:
+           time.sleep(120)  # shorter sleep if there is a failure
